@@ -1,9 +1,28 @@
+import org.h2.jdbcx.JdbcDataSource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sun.security.krb5.internal.ccache.MemoryCredentialsCache;
+
+import java.sql.SQLException;
 
 import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 
 public class DBTest {
 
+
+    private BookDao dao;
+
+
+    @BeforeEach
+    void setUp() throws SQLException {
+        var dataSource = new JdbcDataSource();
+        dataSource.setURL("jdbc:h2:mem:testDatabase;DB_CLOSE_DELAY=-1");
+        try (var connection = dataSource.getConnection()){
+            var statement = connection.createStatement();
+            statement.executeUpdate("create table books (id serial primary key, title varchar(100))");
+        }
+        dao = new BookDao(dataSource);
+    }
 
     @Test
     void shouldRetrieveSavedBook() {
