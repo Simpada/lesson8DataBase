@@ -1,3 +1,4 @@
+import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,18 +9,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DBTest {
 
-
     private BookDao dao;
 
 
     @BeforeEach
-    void setUp() throws SQLException {
+    void setUp()  {
         var dataSource = new JdbcDataSource();
-        dataSource.setURL("jdbc:h2:mem:testDatabase;DB_CLOSE_DELAY=-1");
-        try (var connection = dataSource.getConnection()){
-            var statement = connection.createStatement();
-            statement.executeUpdate("create table books (id serial primary key, title varchar(100), author varchar(100))");
-        }
+        dataSource.setURL("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
+
+        var flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.migrate();
         dao = new BookDao(dataSource);
     }
 
@@ -28,9 +27,10 @@ public class DBTest {
         var book = sampleBook();
         dao.save(book);
         assertThat(dao.retrieve(book.getId()))
+                .hasNoNullFieldsOrProperties()
                 .usingRecursiveComparison()
                 .isEqualTo(book)
-                //.isNotSameAs(book)
+                .isNotSameAs(book)
                 ;
     }
 
