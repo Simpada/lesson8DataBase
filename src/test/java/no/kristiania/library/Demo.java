@@ -1,3 +1,7 @@
+package no.kristiania.library;
+
+import no.kristiania.library.jdbc.JDBCBookDao;
+import no.kristiania.library.jdbc.JDBCLibraryDao;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -6,17 +10,17 @@ import java.sql.SQLException;
 
 public class Demo {
 
-    private final BookDao bookDao;
-    private final LibraryDao libraryDao;
+    private final JDBCBookDao bookDao;
+    private final JDBCLibraryDao libraryDao;
 
     public Demo(DataSource dataSource){
-        this.bookDao = new BookDao(dataSource);
-        this.libraryDao = new LibraryDao(dataSource);
+        this.bookDao = new JDBCBookDao(dataSource);
+        this.libraryDao = new JDBCLibraryDao(dataSource);
     }
 
     public static void main(String[] args) throws SQLException {
         var dataSource = new PGSimpleDataSource();
-        dataSource.setURL("jdbc:postgresql://localhost:5432/testdb");
+        dataSource.setURL("no.kristiania.library.jdbc:postgresql://localhost:5432/testdb");
         dataSource.setUser("test");
         dataSource.setPassword("super_safe_password");
         Flyway.configure().dataSource(dataSource).load().migrate();

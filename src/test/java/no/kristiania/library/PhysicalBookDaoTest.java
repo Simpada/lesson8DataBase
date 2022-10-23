@@ -1,3 +1,8 @@
+package no.kristiania.library;
+
+import no.kristiania.library.jdbc.JDBCBookDao;
+import no.kristiania.library.jdbc.JDBCLibraryDao;
+import no.kristiania.library.jdbc.JDBCPhysicalBookDao;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
@@ -9,9 +14,9 @@ public class PhysicalBookDaoTest {
 
 
     private final DataSource dataSource = InMemoryDataSource.createTestDataSource();
-    private final LibraryDao libraryDao = new LibraryDao(dataSource);
-    private final BookDao bookDao = new BookDao(dataSource);
-    private final PhysicalBookDao dao = new PhysicalBookDao(dataSource);
+    private final JDBCLibraryDao libraryDao = new JDBCLibraryDao(dataSource);
+    private final JDBCBookDao bookDao = new JDBCBookDao(dataSource);
+    private final JDBCPhysicalBookDao dao = new JDBCPhysicalBookDao(dataSource);
 
     @Test
     void shouldListBooksByLibrary() throws SQLException {

@@ -1,3 +1,5 @@
+package no.kristiania.library;
+
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 

@@ -1,7 +1,9 @@
+package no.kristiania.library;
+
 public class Library {
     private String name;
     private String address;
-    private Long id;
+    private long id;
 
     public void setName(String name) {
         this.name = name;
@@ -20,11 +22,11 @@ public class Library {
         return address;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

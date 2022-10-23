@@ -1,3 +1,5 @@
+package no.kristiania.library;
+
 import java.util.Random;
 
 public class SampleData {
@@ -21,7 +23,7 @@ public class SampleData {
         library.setName(
                 pickOne("Oslo", "Grunerløkka", "Bergen", "Sogndal", "Ulvik")
                 + " " +
-                pickOne("Public Library", "Deichmanske", "City Library")
+                pickOne("Public no.kristiania.library.Library", "Deichmanske", "City no.kristiania.library.Library")
         );
         library.setAddress(sampleFullName() + " gate " + random.nextInt(100));
         return library;

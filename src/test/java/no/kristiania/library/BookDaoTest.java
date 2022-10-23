@@ -1,12 +1,15 @@
+package no.kristiania.library;
+
+import no.kristiania.library.jdbc.JDBCBookDao;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DBTest {
+public class BookDaoTest {
 
-    private final BookDao dao = new BookDao(InMemoryDataSource.createTestDataSource());
+    private final JDBCBookDao dao = new JDBCBookDao(InMemoryDataSource.createTestDataSource());
 
     @Test
     void shouldRetrieveSavedBook() throws SQLException {

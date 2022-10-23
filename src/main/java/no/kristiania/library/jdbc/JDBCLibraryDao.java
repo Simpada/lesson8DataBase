@@ -1,16 +1,21 @@
+package no.kristiania.library.jdbc;
+
+import no.kristiania.library.Library;
+import no.kristiania.library.LibraryDao;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LibraryDao {
+public class JDBCLibraryDao implements LibraryDao {
 
     private final DataSource dataSource;
 
-    public LibraryDao(DataSource dataSource) {
+    public JDBCLibraryDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-
+    @Override
     public void save(Library library) throws SQLException {
 
         try(var connection = dataSource.getConnection()) {
@@ -28,7 +33,8 @@ public class LibraryDao {
         }
     }
 
-    public Library retrieve(Long id) throws SQLException {
+    @Override
+    public Library retrieve(long id) throws SQLException {
 
         try (var connection = dataSource.getConnection()) {
             try (var statement = connection.prepareStatement("select * from libraries where id = ?")) {

@@ -1,17 +1,24 @@
+package no.kristiania.library.jdbc;
+
+import no.kristiania.library.Book;
+import no.kristiania.library.Library;
+import no.kristiania.library.PhysicalBookDao;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhysicalBookDao {
+public class JDBCPhysicalBookDao implements PhysicalBookDao {
 
     private final DataSource dataSource;
     
     
-    public PhysicalBookDao(DataSource dataSource) {
+    public JDBCPhysicalBookDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
+    @Override
     public void insert(Library library, Book book) throws SQLException {
         try (var connection = dataSource.getConnection()) {
             var sql = "insert into physical_books (library_id, book_id) values (?,?)";
@@ -24,7 +31,8 @@ public class PhysicalBookDao {
         }
     }
 
-    public List<Book> findByLibrary(Long libraryId) throws SQLException {
+    @Override
+    public List<Book> findByLibrary(long libraryId) throws SQLException {
 
         try (var connection = dataSource.getConnection()) {
             var sql = """
@@ -37,7 +45,7 @@ public class PhysicalBookDao {
                 try (var rs = statement.executeQuery()) {
                     var books = new ArrayList<Book>();
                     while (rs.next()) {
-                        books.add(BookDao.readBooks(rs));
+                        books.add(JDBCBookDao.readBooks(rs));
                     }
                     return books;
                 }

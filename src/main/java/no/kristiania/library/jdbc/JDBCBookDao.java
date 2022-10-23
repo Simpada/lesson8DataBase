@@ -1,3 +1,5 @@
+package no.kristiania.library.jdbc;
+
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -5,14 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDao {
+import no.kristiania.library.Book;
+import no.kristiania.library.BookDao;
+
+public class JDBCBookDao implements BookDao {
 
     private final DataSource dataSource;
 
-    public BookDao(DataSource dataSource) {
+    public JDBCBookDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
+    @Override
     public void save(Book book) throws SQLException {
         try (var connection = dataSource.getConnection()) {
             var sql = "insert into books (title, author, release_year) values (?,?,?)";
@@ -30,7 +36,8 @@ public class BookDao {
         }
     }
 
-    public Book retrieve(Long id) throws SQLException {
+    @Override
+    public Book retrieve(long id) throws SQLException {
 
         try (var connection = dataSource.getConnection()) {
             try (var statement = connection.prepareStatement("select * from books where id = ?")) {
@@ -47,7 +54,7 @@ public class BookDao {
     }
 
 
-
+    @Override
     public List<Book> findByAuthorName(String authorName) throws SQLException {
 
         try (var connection = dataSource.getConnection()) {
