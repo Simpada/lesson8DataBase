@@ -34,6 +34,23 @@ public class DBTest {
                 ;
     }
 
+    @Test
+    void shouldFindBooksByAuthorName() throws SQLException {
+        var book = sampleBook();
+        var bookWithSameAuthor = sampleBook();
+        bookWithSameAuthor.setAuthor(book.getAuthor());
+        var bookWithOtherAuthor = sampleBook();
+        bookWithOtherAuthor.setAuthor("Other Author");
+
+        dao.save(book);
+        dao.save(bookWithSameAuthor);
+        dao.save(bookWithOtherAuthor);
+
+        assertThat(dao.findByAuthorName(book.getAuthor()))
+                .extracting(Book::getId)
+                .contains(book.getId(), bookWithSameAuthor.getId())
+                .doesNotContain(bookWithOtherAuthor.getId());
+    }
 
     private Book sampleBook() {
         var book = new Book();

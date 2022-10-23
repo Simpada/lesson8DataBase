@@ -1,6 +1,7 @@
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BookDao {
@@ -29,5 +30,10 @@ public class BookDao {
 
         return allBooks.get(id);
 
+    }
+
+    public List<Book> findByAuthorName(String author) {
+
+        return (List<Book>) allBooks;
     }
 }
