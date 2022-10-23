@@ -52,6 +52,11 @@ public class DBTest {
                 .doesNotContain(bookWithOtherAuthor.getId());
     }
 
+    @Test
+    void shouldRetrieveNullForMissingBook() throws SQLException {
+        assertThat(dao.retrieve(-1L)).isNull();
+    }
+
     private Book sampleBook() {
         var book = new Book();
         book.setTitle("Java in a Nutshell");
