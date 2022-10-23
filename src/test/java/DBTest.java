@@ -1,11 +1,10 @@
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sun.security.krb5.internal.ccache.MemoryCredentialsCache;
 
 import java.sql.SQLException;
 
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DBTest {
 
@@ -25,7 +24,7 @@ public class DBTest {
     }
 
     @Test
-    void shouldRetrieveSavedBook() {
+    void shouldRetrieveSavedBook() throws SQLException {
         var book = sampleBook();
         dao.save(book);
         assertThat(dao.retrieve(book.getId()))

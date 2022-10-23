@@ -2,7 +2,6 @@ create user test password 'super_safe_password';
 
 create database testDB with owner test;
 
-
 create schema testLibrary;
 
 create table books (
