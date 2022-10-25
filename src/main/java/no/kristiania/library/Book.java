@@ -1,8 +1,15 @@
 package no.kristiania.library;
 
+import jakarta.persistence.*;
+
+@Entity
+@NamedQuery(
+        name = "findByAuthor", query = "select b from Book b where b.author = :authorName"
+)
 public class Book {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
     private String author;
