@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class JPALibraryDao implements LibraryDao {
 
     private final EntityManager entityManager;
+
     public JPALibraryDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

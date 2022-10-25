@@ -5,10 +5,8 @@ import no.kristiania.library.jdbc.JDBCBookDao;
 import no.kristiania.library.jdbc.JDBCLibraryDao;
 import no.kristiania.library.jdbc.JDBCPhysicalBookDao;
 import org.flywaydb.core.Flyway;
-import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,9 +14,9 @@ import java.util.Properties;
 
 public class Demo {
 
-    private final JDBCBookDao bookDao;
-    private final JDBCLibraryDao libraryDao;
-    private final JDBCPhysicalBookDao physicalBookDao;
+    private final BookDao bookDao;
+    private final LibraryDao libraryDao;
+    private final PhysicalBookDao physicalBookDao;
 
     public Demo(DataSource dataSource){
         this.bookDao = new JDBCBookDao(dataSource);

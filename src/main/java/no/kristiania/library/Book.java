@@ -3,6 +3,7 @@ package no.kristiania.library;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "books")
 @NamedQuery(
         name = "findByAuthor", query = "select b from Book b where b.author = :authorName"
 )
@@ -13,6 +14,7 @@ public class Book {
     private long id;
     private String title;
     private String author;
+    @Column(name = "release_year")
     private int year;
 
 
