@@ -6,7 +6,7 @@ public class SampleData {
 
     private static final Random random = new Random();
 
-    static Book sampleBook() {
+    public static Book sampleBook() {
         var book = new Book();
         book.setTitle(pickOne(
             "The Adventures of ",

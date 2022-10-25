@@ -1,7 +1,7 @@
 create table books (
-                       id SERIAL primary key,
-                       title varchar(100) not null ,
-                       author varchar(100) not null
+       id int identity primary key,
+       title varchar(100) not null ,
+       author varchar(100) not null
 );
 
 alter table books add release_year int;
