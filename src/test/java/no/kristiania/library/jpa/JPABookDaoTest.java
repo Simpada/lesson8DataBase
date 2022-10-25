@@ -1,9 +1,8 @@
-package no.kristiania.library.JPA;
+package no.kristiania.library.jpa;
 
 import jakarta.persistence.EntityManager;
 import no.kristiania.library.AbstractBookDaoTest;
 import no.kristiania.library.TestEntityManager;
-import no.kristiania.library.jpa.JPABookDao;
 
 public class JPABookDaoTest extends AbstractBookDaoTest {
 

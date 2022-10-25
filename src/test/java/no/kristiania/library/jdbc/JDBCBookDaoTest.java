@@ -1,9 +1,7 @@
-package no.kristiania.library.JDBC;
+package no.kristiania.library.jdbc;
 
 import no.kristiania.library.AbstractBookDaoTest;
-import no.kristiania.library.BookDao;
 import no.kristiania.library.InMemoryDataSource;
-import no.kristiania.library.jdbc.JDBCBookDao;
 
 public class JDBCBookDaoTest extends AbstractBookDaoTest {
     protected JDBCBookDaoTest() {
