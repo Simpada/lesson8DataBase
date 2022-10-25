@@ -43,6 +43,11 @@
             <version>9.4.0</version>
         </dependency>
         <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-sqlserver</artifactId>
+            <version>9.4.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.logevents</groupId>
             <artifactId>logevents</artifactId>
             <version>0.4.1</version>
